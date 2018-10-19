@@ -1,0 +1,12 @@
+venv
+db.sqlite3
+*.log
+*.pyc
+__pycache_/_
+.idea/
+**/node_modules
+yarn-error.log
+.vscode
+.DS_Store
+kisik.s
+bundle.css

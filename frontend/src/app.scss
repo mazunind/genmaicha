@@ -1,0 +1,101 @@
+@import "node_modules/concise.css/concise";
+@import "node_modules/concise-ui/concise-ui";
+@import "node_modules/normalize.css/normalize";
+
+// layout preset
+html, body{
+    height: 100%;
+}
+
+#app {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    #wrapper{
+        height: 100%;
+        width: 100%;
+        #routes {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }}
+    
+}
+
+//login page
+#login{
+    .login-box{
+        #login-form{
+            margin-left: 10%;
+            margin-right: 10%;
+            margin-bottom: 5%;
+            input{
+                height: 2em;
+                margin-top: 3%;
+                
+            }
+        }
+
+    }
+}
+
+//main page
+.stripe{
+    height: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    .day{
+        width: 13%;
+        .day-upper{
+            font-size: 2em;
+            color: #7f2f27;
+            text-align: center;
+            
+        }
+        .day-lower{
+            .lesson{
+                margin-top: 10%;
+                display: flex;
+                justify-content: space-between;
+                .lesson-main{
+                    margin-left: 5%;
+                }
+                .lesson-time{
+                    margin-right: 5%;
+                    font-size: 1.7em;
+                }
+            }
+        }
+    }
+}
+
+//profile component
+#bottom{
+    position: fixed;
+    bottom: 2%;
+    left: 1%;
+    
+}
+.logout-button{
+    margin-top: 4%;
+}
+.add-button{
+    position: fixed;
+    right: 1%;
+    bottom: 2%;
+}
+
+//misc
+.medium-button{
+    height: 1.5em;
+}
+
+.lesson-none{
+    font-size: 2em;
+    color: #d3d3d3;
+    text-align: center;
+}

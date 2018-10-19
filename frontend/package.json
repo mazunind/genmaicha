@@ -1,0 +1,41 @@
+{
+  "name": "frontend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "dmmeow",
+  "license": "MIT",
+  "scripts": {
+    "build": "webpack",
+    "dev": "webpack-dev-server"
+  },
+  "dependencies": {
+    "autoprefixer": "^9.1.5",
+    "babel": "^6.23.0",
+    "babel-core": "^6.26.3",
+    "babel-loader": "7",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "classnames": "^2.2.6",
+    "concise-ui": "^0.2.1",
+    "concise.css": "^4.1.2",
+    "css-loader": "^1.0.0",
+    "dev-server": "^0.0.2",
+    "extract-loader": "^3.0.0",
+    "file-loader": "^2.0.0",
+    "local": "^0.3.3",
+    "node-sass": "^4.9.3",
+    "normalize.css": "^8.0.0",
+    "postcss-loader": "^3.0.0",
+    "prop-types": "^15.6.2",
+    "react": "^16.5.2",
+    "react-dom": "^16.5.2",
+    "react-router": "^4.3.1",
+    "react-router-dom": "^4.3.1",
+    "sass-loader": "^7.1.0",
+    "webpack": "^4.20.2",
+    "webpack-dev-server": "^3.1.9"
+  },
+  "devDependencies": {
+    "webpack-cli": "^3.1.1"
+  }
+}
