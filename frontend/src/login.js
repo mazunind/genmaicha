@@ -10,7 +10,7 @@ const postCredentials = (e) => {
     }
     // making a POST request with credentials and putting acquired JWT in localStorage 
     //(I know how bad of a practice it is but my app is simple and there is no possibility of XSS so whatevs)
-    fetch(document.location.origin.slice(0,-5) + ':8000' + '/auth/token/obtain', {
+    fetch(document.location.hostname + ':8000' + '/auth/token/obtain', {
         method: 'post',
         headers: {
             'Content-Type': 'application/json'

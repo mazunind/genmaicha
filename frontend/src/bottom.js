@@ -9,7 +9,7 @@ class Bottom extends React.Component {
             },
             avatar: null
         }
-        fetch(document.location.origin.slice(0,-5) + ':8000' + '/api/profile', {
+        fetch(document.location.hostname + ':8000' + '/api/profile', {
             method: 'get',
             headers: {
                 'Content-Type': 'application/json',
