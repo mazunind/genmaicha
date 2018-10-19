@@ -15,7 +15,7 @@ class MainStripe extends React.Component {
     
     componentDidMount(){
         // geting an array of all lessons for this week  
-        fetch(document.location.hostname + ':8000' + '/api/main', {
+        fetch(document.location.protocol + '//' + document.location.hostname + ':8000' + '/api/main', {
             method: 'get',
             headers: {
                 'Content-Type': 'application/json',
