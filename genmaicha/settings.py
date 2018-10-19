@@ -25,7 +25,7 @@ SECRET_KEY = 'brv!r%7jfa3v&rk+zhv6ahg1z+$h1xl_+671h1l63x7soj!qd@'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['www.morioh.club']
+ALLOWED_HOSTS = ['morioh.club']
 
 # Application definition
 
