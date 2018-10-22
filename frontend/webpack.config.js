@@ -2,7 +2,7 @@ const path = require('path');
 const autoprefixer = require('autoprefixer');
 
 module.exports = [{
-    mode: 'production',
+    mode: 'development',
     entry: ['./src/app.js', './src/app.scss'],
     output: {
         path: path.join(__dirname, 'public'),
