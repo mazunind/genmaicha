@@ -18,7 +18,11 @@ const postCredentials = (e) => {
           body: JSON.stringify(credentials)
     }).then(response =>  response.json()).then(data =>{
         localStorage.token = data.access
-        window.location.replace('/main')
+        if (data.access){
+            window.location.replace('/main')
+        } else {
+            alert('No user with such credentials')
+        }
         
     } )
 }
@@ -31,10 +35,11 @@ const Login = () => (
         <div className='card-box login-box'>
             <form id='login-form' onSubmit={postCredentials.bind(this)}>
                 <h1 id='login-title'>Your credentials go here</h1> <br/>
-                <input id='username' type='text' name='login'/><br/>
-                <input id='password' type='password' name='password'/><br/>
+                <input id='username' type='text' name='login' defaultValue='employer'/><br/>
+                <input id='password' type='password' name='password' defaultValue='iwillemployyou'/><br/>
                 <input id='login-button'  type='submit' value='Login'/>
             </form>
+        <div id='disclaimer'></div>
         </div>
         
     </div>

@@ -3,10 +3,10 @@ import Modal from 'react-modal'
 import ReactDOM from 'react-dom'
 
 class Bottom extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props)
         this.state = {
-            user : {
+            user: {
                 username: ''
 
             },
@@ -23,28 +23,28 @@ class Bottom extends React.Component {
         }).then(response => response.json()).then(data => this.setState(data)).catch(error => console.log(error))
 
     }
-    logOut(){
+    logOut() {
         localStorage.clear()
         window.location.replace('/')
     }
-    openModal(){
-        this.setState({modalIsOpen: true})
+    openModal() {
+        this.setState({ modalIsOpen: true })
     }
 
     closeModal() {
-        this.setState({modalIsOpen: false});
+        this.setState({ modalIsOpen: false });
     }
 
-    clearDesc(){
-        document.getElementById('desc').value=''
+    clearDesc() {
+        document.getElementById('desc').value = ''
     }
 
-    nowDate(){
+    nowDate() {
         let now = new Date()
         now.setHours(0, 0, 0, 0)
         return now.toISOString()
     }
-    postLesson(e){
+    postLesson(e) {
         e.preventDefault()
         let select = document.getElementById('course')
         let data = {
@@ -63,42 +63,48 @@ class Bottom extends React.Component {
         }).then(this.closeModal.bind(this)).catch(error => console.log(error))
     }
 
-    render(){
-        return (
-            <div id='bottom'>
-                You are logged in as {this.state.user.username} <br/>
-                <button className='medium-button logout-button' onClick={this.logOut}>Log out</button>
-                <button className='medium-button add-button' onClick={this.openModal.bind(this)}>Add Lesson</button>
-                <Modal
-                    isOpen={this.state.modalIsOpen}
-                    onRequestClose={this.closeModal.bind(this)}
-                    contentLabel='Add a lesson'
-                    ariaHideApp={false}
-                    className='modal card-box' 
-                >
-                    <form className='lesson-form' onSubmit={this.postLesson.bind(this)}>
-                        <h4 id='add-login-title'>To add a lesson choose a desired course, date and description</h4> 
-                        <CourseDropdown/>
-                        <input id='desc' type='text' name='desc' defaultValue='Description' onClick={this.clearDesc}/>
-                        <input id='datetime' type='datetime-local'  name='datetime'/>
-                        <input className='medium-button lesson-form-button' type='submit' value='Add'></input>
-                    </form>
-                </Modal>
-            </div>
-        );
+    render() {
+        if (localStorage.token) {
+            return (
+                <div id='bottom'>
+                    You are logged in as {this.state.user.username} <br />
+                    <button className='medium-button logout-button' onClick={this.logOut}>Log out</button>
+                    <button className='medium-button add-button' onClick={this.openModal.bind(this)}>Add Lesson</button>
+                    <Modal
+                        isOpen={this.state.modalIsOpen}
+                        onRequestClose={this.closeModal.bind(this)}
+                        contentLabel='Add a lesson'
+                        ariaHideApp={false}
+                        className='modal card-box'
+                    >
+                        <form className='lesson-form' onSubmit={this.postLesson.bind(this)}>
+                            <h4 id='add-login-title'>To add a lesson choose a desired course, date and description</h4>
+                            <CourseDropdown />
+                            <input id='desc' type='text' name='desc' defaultValue='Description' onClick={this.clearDesc} />
+                            <input id='datetime' type='datetime-local' name='datetime' />
+                            <input className='medium-button lesson-form-button' type='submit' value='Add'></input>
+                        </form>
+                    </Modal>
+                </div>
+            );
+        } else {
+            return (
+                <div id='bottom'></div>
+            )
+        }
     }
 }
 
 export default Bottom;
 
 class CourseDropdown extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props)
         this.state = {
             options: []
         }
     }
-    componentDidMount(){
+    componentDidMount() {
         //getting options for course dropdowm menu
         fetch(document.location.protocol + '//' + document.location.hostname + ':8000' + '/api/courses/', {
             method: 'get',
@@ -106,10 +112,10 @@ class CourseDropdown extends React.Component {
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + localStorage.token
             }
-        }).then(response => response.json()).then(data => this.setState({options: data}))
+        }).then(response => response.json()).then(data => this.setState({ options: data }))
     }
-    render(){
-        return(
+    render() {
+        return (
             <div>
                 <select id='course'>
                     {this.state.options.map(option => (
