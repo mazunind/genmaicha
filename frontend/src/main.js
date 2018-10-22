@@ -59,7 +59,7 @@ class MainStripe extends React.Component {
         })
         .catch(error => console.log(error))
     }
-
+    // mapping state arrays to Day components
     render(){
         return(
             <div className='stripe'>

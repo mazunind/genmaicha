@@ -3,7 +3,10 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from .models import Student, Course, Lesson
 from django.contrib.auth.models import User
-from .serializers import ProfileSerializer, StudentSerializer, LessonSerializer
+
+from .serializers import ProfileSerializer, StudentSerializer, LessonSerializer, LessonCreationSerializer, \
+    CourseSerializer
+from rest_framework import status
 import datetime
 
 
@@ -23,11 +26,43 @@ class StudentMany(APIView):
         return Response(serialized.data)
 
 
+class LessonMany(APIView):
+
+    def get(self, request):
+        user = request.user
+        serialized = LessonSerializer(user.students.all(), many=True)
+        return Response(serialized.data)
+
+    def post(self, request):
+        user = request.user
+        serialized = LessonCreationSerializer(data=request.data)
+        if serialized.is_valid():
+            serialized.save()
+            return Response(status=status.HTTP_201_CREATED)
+        return Response(status=status.HTTP_400_BAD_REQUEST)
+
+
 class StudentSingle(APIView):
 
     def get(self, request, pk):
         serialized = StudentSerializer(Student.objects.get(id=pk))
         return Response(serialized.data)
+
+
+class LessonSingle(APIView):
+
+    def get(self, request, pk):
+        serialized = LessonSerializer(Lesson.objects.get(id=pk))
+        return Response(serialized.data)
+
+
+class CourseMany(APIView):
+
+    def get(self, request):
+        serialized = CourseSerializer(Course.objects.filter(student__teacher=request.user), many=True)
+        return Response(serialized.data)
+
+
 
 # API View for a main page
 class MainView(APIView):

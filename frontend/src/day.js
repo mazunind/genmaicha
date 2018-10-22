@@ -7,6 +7,7 @@ class Day extends React.Component {
     constructor(props) {
         super(props)
     };
+    //function for displaying proper weekday above day component
     dayOfWeek(index){
         switch(index){
             case 0:
@@ -32,6 +33,8 @@ class Day extends React.Component {
                 break
         }
     }
+    
+
     render() {
         this.props.lessons.sort((a, b) => a.datetime - b.datetime)
         return (

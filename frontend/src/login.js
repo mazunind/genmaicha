@@ -21,14 +21,13 @@ const postCredentials = (e) => {
         window.location.replace('/main')
         
     } )
-    
-    console.log(localStorage.token)
 }
 
 
-// SFC for login card
+// SFC for login card; shitty auth redirect
 const Login = () => (
     <div id='login'>
+        {localStorage.token && window.location.replace('/main')} 
         <div className='card-box login-box'>
             <form id='login-form' onSubmit={postCredentials.bind(this)}>
                 <h1 id='login-title'>Your credentials go here</h1> <br/>

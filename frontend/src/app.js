@@ -8,6 +8,7 @@ import Login from './login.js';
 import Bottom from './bottom.js';
 import MainStripe from './main.js';
 
+//rendering bottom part only if user authenticated
 const isLogged = () => {
     if(localStorage.token){
         return <Bottom/>
