@@ -12,8 +12,7 @@ class MainStripe extends React.Component {
             ]
         }  
     }
-    
-    componentDidMount(){
+    fetchData(){
         // geting an array of all lessons for this week  
         fetch(document.location.protocol + '//' + document.location.hostname + ':8000' + '/api/main', {
             method: 'get',
@@ -59,6 +58,16 @@ class MainStripe extends React.Component {
         })
         .catch(error => console.log(error))
     }
+
+    componentDidMount(){
+        this.fetchData()
+    }
+    componentDidUpdate(prevProps){
+        if (this.props.flag !== prevProps.flag){
+            this.fetchData()
+        }
+    }
+
     // mapping state arrays to Day components
     render(){
         return(

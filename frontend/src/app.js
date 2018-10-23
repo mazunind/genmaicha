@@ -28,11 +28,13 @@ class Routes extends React.Component {
                 <div id='wrapper'>
                     <div id='routes'>
                         <Route path='/' component={Login} exact={true} />
-                        <Route path='/main' component = {MainStripe} exact={true} />
+                        <Route 
+                            path='/main' 
+                            render = {(props) => <MainStripe {...props} flag={this.state.flag} />} 
+                            exact={true} />
                     </div>
                     <div>
-                        <Bottom />
-                        <button onClick={this.causeRender.bind(this)}>test</button>
+                        <Bottom renderRoutes={this.causeRender.bind(this)}/>
                     </div>
                 </div>
             </Router>

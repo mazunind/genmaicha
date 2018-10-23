@@ -95,6 +95,7 @@ html, body{
 //misc
 .medium-button{
     height: 1.5em;
+    width: 120px;
 }
 
 .lesson-none{
@@ -123,6 +124,14 @@ html, body{
         input{
             height: 2em;
             margin-top: 5%;
+        }
+    }
+    #disclaimer{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        #disclaimer-text{
+            margin: 5%;
         }
     }
 

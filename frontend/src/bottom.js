@@ -1,6 +1,6 @@
 import React from 'react'
 import Modal from 'react-modal'
-import ReactDOM from 'react-dom'
+import CourseDropdown from './coursedropdown.js'
 
 class Bottom extends React.Component {
     constructor(props) {
@@ -60,7 +60,8 @@ class Bottom extends React.Component {
                 'Authorization': 'Bearer ' + localStorage.token
             },
             body: JSON.stringify(data)
-        }).then(this.closeModal.bind(this)).catch(error => console.log(error))
+        }).then(this.props.renderRoutes).catch(error => console.log(error))
+        this.closeModal()
     }
 
     render() {
@@ -97,32 +98,3 @@ class Bottom extends React.Component {
 
 export default Bottom;
 
-class CourseDropdown extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            options: []
-        }
-    }
-    componentDidMount() {
-        //getting options for course dropdowm menu
-        fetch(document.location.protocol + '//' + document.location.hostname + ':8000' + '/api/courses/', {
-            method: 'get',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.token
-            }
-        }).then(response => response.json()).then(data => this.setState({ options: data }))
-    }
-    render() {
-        return (
-            <div>
-                <select id='course'>
-                    {this.state.options.map(option => (
-                        <option key={option.id} apikey={option.id}>{option.student.first_name}'s {option.name} course </option>
-                    ))}
-                </select>
-            </div>
-        )
-    }
-}
