@@ -64,7 +64,7 @@ html, body{
                 margin-top: 10%;
                 display: flex;
                 justify-content: space-between;
-                .lesson-main{
+                                .lesson-main{
                     margin-left: 5%;
                 }
                 .lesson-time{
@@ -73,6 +73,12 @@ html, body{
                 }
             }
         }
+    }
+}
+
+.to-delete{
+    &:hover{
+        background-color: #FFB5AF;
     }
 }
 
@@ -91,11 +97,16 @@ html, body{
     right: 1%;
     bottom: 2%;
 }
+.delete-button{
+    position: fixed;
+    right: 12%;
+    bottom: 2%;
+}
 
 //misc
 .medium-button{
     height: 1.5em;
-    width: 120px;
+    width: 140px;
 }
 
 .lesson-none{

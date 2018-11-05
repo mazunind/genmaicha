@@ -55,6 +55,12 @@ class LessonSingle(APIView):
         serialized = LessonSerializer(Lesson.objects.get(id=pk))
         return Response(serialized.data)
 
+    def delete(self, request, pk):
+        lesson = Lesson.objects.get(id=pk)
+        lesson.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+
 
 class CourseMany(APIView):
 

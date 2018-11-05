@@ -16,7 +16,6 @@ class Day extends React.Component {
         super(props)
     };
     
-
     render() {
         this.props.lessons.sort((a, b) => a.datetime - b.datetime)
         return (
@@ -40,7 +39,7 @@ class Lesson extends React.Component {
 
     render() {
         return (
-            <div className='lesson card-box'>
+            <div className='lesson card-box' apikey={this.props.lesson.id}>
                 <div className='lesson-main'>{
                     this.props.lesson.course.student.first_name} <br/>
                     {this.props.lesson.course.name}

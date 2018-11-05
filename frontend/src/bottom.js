@@ -5,6 +5,8 @@ import CourseDropdown from './coursedropdown.js'
 class Bottom extends React.Component {
     constructor(props) {
         super(props)
+        this.initDeleteLesson = this.initDeleteLesson.bind(this)
+        this.deleteLesson = this.deleteLesson.bind(this)
         this.state = {
             user: {
                 username: ''
@@ -12,6 +14,7 @@ class Bottom extends React.Component {
             },
             avatar: null,
             modalIsOpen: false
+
         }
         //fetching user data
         fetch(document.location.protocol + '//' + document.location.hostname + ':8000' + '/api/profile', {
@@ -35,17 +38,44 @@ class Bottom extends React.Component {
         this.setState({ modalIsOpen: false });
     }
 
-    clearDesc() {
-        document.getElementById('desc').value = ''
+    deleteLesson(event) {
+        let target = event.target
+        while (target.className != 'day-lower') {
+            if (target.className == 'lesson card-box to-delete') {
+                //delete request done with fetch
+                fetch(document.location.protocol + '//' + document.location.hostname + ':8000' +
+                    '/api/lessons/' + target.getAttribute('apikey'), {
+                        method: 'delete',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': 'Bearer ' + localStorage.token
+                        }
+
+                    }).then(this.props.renderRoutes).catch(error => console.log(error))
+                let lessons = document.getElementsByClassName('lesson')
+                Array.from(lessons).forEach(element => {
+                    element.removeEventListener('click', this.deleteLesson)
+                    element.classList.remove('to-delete')
+                })
+            }
+            target = target.parentNode
+        }
     }
 
-    nowDate() {
-        let now = new Date()
-        now.setHours(0, 0, 0, 0)
-        return now.toISOString()
+    initDeleteLesson() {
+        let lessons = document.getElementsByClassName('lesson')     //getting all lesson divs
+        console.log(this)
+        Array.from(lessons).forEach((element) => {
+            element.addEventListener('click', this.deleteLesson)
+            element.classList.add('to-delete')
+        })
     }
+
+
+
     postLesson(e) {
         e.preventDefault()
+        console.log(this)
         let select = document.getElementById('course')
         let data = {
             course_id: select.options[select.selectedIndex].getAttribute('apikey'),
@@ -71,6 +101,7 @@ class Bottom extends React.Component {
                     You are logged in as {this.state.user.username} <br />
                     <button className='medium-button logout-button' onClick={this.logOut}>Log out</button>
                     <button className='medium-button add-button' onClick={this.openModal.bind(this)}>Add Lesson</button>
+                    <button className='medium-button delete-button' onClick={this.initDeleteLesson} >Delete Lesson</button>
                     <Modal
                         isOpen={this.state.modalIsOpen}
                         onRequestClose={this.closeModal.bind(this)}
